@@ -1,5 +1,6 @@
 #include <mpg123.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "audio_decoder.h"
 

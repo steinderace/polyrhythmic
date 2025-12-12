@@ -1,5 +1,5 @@
-#ifndef INIT_MPG123_H
-#define INIT_MPG123_H
+#ifndef AUDIO_DECODER_H
+#define AUDIO_DECODER_H
 
 #define BUFFER_SIZE 8192
 

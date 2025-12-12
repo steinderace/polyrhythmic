@@ -2,19 +2,18 @@
 #define PLAYLIST_H
 
 // Header file for handling file navigation operations
+#include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Node for doubly linked list
-typedef struct FileNode FileNode;
-
-// Node for doubly linked list
-struct FileNode {
+typedef struct FileNode {
     char *filepath;
     char *title;
-    FileNode *next;
-    FileNode *prev;
-};
+    struct FileNode *next;
+    struct FileNode *prev;
+} FileNode;
 
 // Struct for playlist manager
 typedef struct {
@@ -31,7 +30,8 @@ FileNode* create_node();
 void node_destroy(FileNode* node);
 
 // Playlist operations
-void playlist_add(Playlist* node, char *filepath);
+Playlist* playlist_init();
+void playlist_add(Playlist* pl_node, char *filepath);
 void playlist_remove_current(Playlist* node);
 void playlist_clear(Playlist* node);
 
@@ -39,11 +39,11 @@ void playlist_clear(Playlist* node);
 const char* playlist_get_current(Playlist* node);
 const char* playlist_get_next(Playlist* node);
 const char* playlist_get_previous(Playlist* node);
-bool playlist_goto(Playlist *playlist, int index);
+const char* playlist_goto(Playlist *playlist, int index);
 
 // Utility functions
 int playlist_size(Playlist* playlist);
-bool playlist_is_empty(Playlist* playlist);
+int playlist_is_empty(Playlist* playlist);
 void playlist_fetch(Playlist *playlist);
 
 #endif
