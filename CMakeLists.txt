@@ -4,6 +4,7 @@ project(music_player C)
 set(CMAKE_C_STANDARD 23)
 
 find_package(PkgConfig REQUIRED)
+find_package(SDL2 REQUIRED)
 pkg_check_modules(MPG123 REQUIRED IMPORTED_TARGET libmpg123)
 
 # List all source files
@@ -18,14 +19,17 @@ target_include_directories(music_player PRIVATE
 
 target_compile_options(music_player PRIVATE ${MPG123_CFLAGS_OTHER})
 
-target_link_libraries(music_player PRIVATE PkgConfig::MPG123)
+target_link_libraries(music_player PRIVATE
+    PkgConfig::MPG123
+    SDL2::SDL2
+)
 
 # For testing
 enable_testing()
 
 add_executable(test_playlist tests/test_playlist.c src/playlist.c)
 target_include_directories(test_playlist PRIVATE ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(test_decoder PRIVATE PkgConfig::MPG123)
+target_link_libraries(test_playlist PRIVATE PkgConfig::MPG123)
 add_test(NAME playlist_test COMMAND test_playlist)
 
 # add_executable(test_decoder tests/test_decoder.c src/audio_decoder.c)

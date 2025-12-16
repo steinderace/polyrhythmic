@@ -103,12 +103,18 @@ const char* playlist_get_next(Playlist* pl_node) {
     }
 
     if(pl_node->current->next == NULL) {
-        fprintf(stderr, "No next song available.\n");
-        exit(EXIT_FAILURE);
-        return NULL;
+        if(pl_node->loop && pl_node->head) {
+            pl_node->current = pl_node->head;
+        } else {
+            fprintf(stderr, "No next song available.\n");
+            exit(EXIT_FAILURE);
+            return NULL;
+        }
+    } else {
+        pl_node->current = pl_node->current->next;
     }
 
-    return pl_node->current->next->filepath;
+    return pl_node->current->filepath;
 }
 
 // Returns previous song
