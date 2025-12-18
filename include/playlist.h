@@ -1,4 +1,4 @@
-#ifndef PLAYLIST_H
+    #ifndef PLAYLIST_H
 #define PLAYLIST_H
 
 // Header file for handling file navigation operations

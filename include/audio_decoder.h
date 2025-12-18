@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#define BUFFER_SIZE 8192
+
 typedef struct {
     mpg123_handle *handle;
     long sample_rate;

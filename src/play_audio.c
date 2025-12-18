@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 void play_audio(AudioDecoder *decoder) {
-    if(!decoder || !decoder->initialized) {
+    if(!decoder || !decoder->is_initialized) {
         fprintf(stderr, "Error: decoder does not exist or not initialized.\n");
         exit(EXIT_FAILURE);
     }
