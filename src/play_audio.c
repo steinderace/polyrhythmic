@@ -1,3 +1,19 @@
+#include "play_audio.h"
+#include "audio_decoder.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <SDL.h>
+
+#define BUFFER_SIZE 8192
+
+void init_audio() {
+    if(SDL_Init(SDL_INIT_AUDIO) != 0) {
+        fprintf(stderr, "Error initializing SDL: %s\n", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
+}
+
 void play_audio(const char *filename) {
     if(!filename) {
         fprintf(stderr, "Error: filename is NULL.\n");
@@ -68,6 +84,11 @@ void play_audio(const char *filename) {
 
     // Cleanup
     SDL_CloseAudioDevice(dev);
+    audio_decoder_free(decoder);
+    SDL_Quit();
+}
+
+void close_audio(AudioDecoder *decoder) {
     audio_decoder_free(decoder);
     SDL_Quit();
 }
